@@ -7,8 +7,10 @@ seq=[]
 gene_seq=''
 i=0
 for line in file:
+    #remove \n of the line
     line=line.strip()
     if line[0]=='>':
+        #save sequence when new gene detected
         if gene_seq!='':
             seq.append(gene_seq)
         gene_seq=''
@@ -17,6 +19,7 @@ for line in file:
         name.append(gene_name)
     else:
         gene_seq = gene_seq+line
+#save the last sequence
 seq.append(gene_seq)
 pattern=r'TATA[AT]A[AT]'
 filename=comb+'_spliced_genes.fa'
