@@ -1,3 +1,4 @@
+comb=input("Please imput one of three possible splice donor/acceptor combinations (GTAG, GCAG,ATAC)")
 
 import re
 file = open('Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa','r')
@@ -18,11 +19,13 @@ for line in file:
         gene_seq = gene_seq+line
 seq.append(gene_seq)
 pattern=r'TATA[AT]A[AT]'
-file2 = open('tata_genes.fa','w')
+filename=comb+'_spliced_genes.fa'
+file2 = open(filename,'w')
 for sequence in seq:
     if re.search(pattern,sequence):
-        file2.write('>'+name[i]+'\n')
-        file2.write(sequence+'\n')
+        if re.search(comb,sequence):
+            file2.write('>'+name[i]+'\n')
+            file2.write(sequence+'\n')
     i+=1
 file.close()
 file2.close()
